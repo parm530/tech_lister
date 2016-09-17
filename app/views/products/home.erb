@@ -1,0 +1,5 @@
+<h1>Your Tech-Link's</h1>
+
+<% Product.all.each.with_index(1) do |p, i| %>
+  <%=i%>. <a href="/products/<%=p.id%>"><%=p.name%></a><br>
+  <%end%>

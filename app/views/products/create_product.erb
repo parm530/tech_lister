@@ -1,0 +1,15 @@
+<h2>New Tech-link:</h2>
+
+<form method="POST" action="/products">
+  <h4>Name: <input type="text" name="product[name]" required></h4>
+  <h4>Link: <input type="text" name="product[link]" required ></h4>
+  <h4>Message: <input type="text" name="product[message]"></h4>
+
+  <label>Type(s):</label><br>
+  <%Type.all.each do |type|%>
+    <input type="checkbox" name="product[type_ids][]" value="<%=type.id%>"><%=type.name%><br></input>
+  <%end%><br>
+
+
+  <input type="submit" value="Create Tech-Link">
+</form>
