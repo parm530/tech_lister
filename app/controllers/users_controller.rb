@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   get '/users/:id' do
     if logged_in?
+      @user = User.find(session[:user_id])
       erb :'/users/home'
     else
       redirect to '/signup'
@@ -44,7 +45,5 @@ class UsersController < ApplicationController
     session.clear
     redirect to '/'
   end
-
-
 
 end

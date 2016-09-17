@@ -1,3 +1,11 @@
-<p>Current list of tech-links:</p>
-<p><a href="/products">Add new links!</a></p>
+<h3>Current list of <%= @user.username%>'s tech-links:</h3>
+
+<% @user.products.each.with_index(1) do |p, i| %>
+
+  <%=i%>. <a href="<%=p.link%>" target="_blank"><%=p.name%></a> 
+  <%p.types.each do |type| %>
+    <i>[<%= type.name %>]</i> 
+  <% end %><a href="/products/:id/delete"><img src="https://camo.githubusercontent.com/ff98b768f13cd3214f651654ba1f2c3f7402a92d/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f3930303238302f313439353238392f36393030363362302d343765372d313165332d393236632d6462333439346237396162662e6a7067" style="width:30px;height:30px;border:0" alt="Delete"></a> <a href="/products/:id/edit"><img src="http://downloadicons.net/sites/default/files/write-icon-20739.png" style="width:25px;height:25px;border:0"></a><br>
+<%end%>
+<p><a href="/products/new">Add new links!</a></p>
 
