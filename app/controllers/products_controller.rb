@@ -19,5 +19,8 @@ class ProductsController < ApplicationController
     redirect to "/users/#{@user.id}"
   end
 
+  delete '/products/:id/delete' do
+
+  end
 
 end
