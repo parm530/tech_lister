@@ -2,25 +2,24 @@
 
 <% @user.products.each.with_index(1) do |p, i| %>
 
-  <strong><%=i%>. <a href="<%=p.link%>" target="_blank"><%=p.name%></a></strong> 
+  <h3><strong><%=i%>. <a href="<%=p.link%>" target="_blank"><%=p.name%></a></strong> </h3>
 
-  <p><strong>Message: </strong><%= p.message%></p> 
-  <p>Type(s): 
-  <%p.types.each do |type| %>
-    <i>[<%= type.name %>]</i>
+  <h4><strong>Message: </strong><%= p.message%></h4> 
     <% object = LinkThumbnailer.generate(p.link)%>
     <%object.images.first.src.to_s%>
     <img src="<%=object.images.first.src.to_s%>">
-  <% end %></p>
+  <h4>Type(s): 
+  <%p.types.each do |type| %>
+    <i>[<%= type.name %>]</i>
+  <% end %></h4>
 
-  <a href="/products/<%=p.id%>/edit"><input type="submit" value="Edit"></a>
-  
+  <a href="/products/<%=p.id%>/edit" class="btn btn-primary">Edit</a>
+
   <form method="post" action="/products/<%=p.id%>">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete">
+    <input class="btn btn-danger" type="submit" value="Delete">
   </form><br>
 
 <%end%>
 
-<p><a href="/products/new">Add new links!</a></p>
-
+<a href="/products/new" class="btn btn-primary">Add new links!</a>

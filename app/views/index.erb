@@ -1,25 +1,28 @@
-<h2>Popular User Products</h2>
+<h2><i>Popular User Products</i></h2>
 <h4>Sort By:</h4>
 
 <% if logged_in? %>
   <form method="post" action="/rating">
-    <input type="submit" value="Rating">
+    <input type="submit" class="btn btn-primary" value="Rating">
   </form><br>
   <form method="post" action="/name">
-    <input type="submit" value="Name">
+    <input type="submit" class="btn btn-primary" value="Name">
   </form>
 <% end %>
 
 <% @products.each.with_index(1) do |prod, i| %>
   <% if logged_in? %>
-    <h3><%=i%>. <a href="<%= prod.link %>" target="_blank"><%= prod.name %></a>
-    <p>Rating: <i><%= prod.rating = prod.users.size %></i> user(s) have Tech-Listed this product </p>
+    <h3><%=i%>. <a href="<%= prod.link %>" target="_blank" ><%= prod.name %></a></h3>
+    <% object = LinkThumbnailer.generate(prod.link)%>
+    <%object.images.first.src.to_s%>
+    <img src="<%=object.images.first.src.to_s%>">
+    <h4>Rating: <i><%= prod.rating = prod.users.size %></i> user(s) have Tech-Listed this item</h4>
     <% prod.save %>
 
     <form method="post" action="/user_products">
       <input type="hidden" name="product_id" value="<%=prod.id%>">
-      <input type="submit" value="Add Tech-List">
-    </form></h3>
+      <input type="submit" class="btn btn-primary" value="Add Tech-List">
+    </form>
 
   <%else%>
     <h3><%=i%>. <a href="<%= prod.link %>" target="_blank"><%= prod.name %><br></a></h3>

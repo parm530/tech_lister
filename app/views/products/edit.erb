@@ -1,17 +1,42 @@
-<h3>Edit: <%= @prod.name %> </h3>
-
-
-<form method="POST" action="/products/<%=@prod.id%>">
+<form class="form-horizontal" method="POST" action="/products/<%=@prod.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input id="hidden" type="hidden" name="product_id" value="<%= @prod.id %>">
-  Name: <input type="text" name="product[name]" required ><br><br>
-  Link: <input type="text" name="product[link]" required ><br><br>
-  Message:<input type="text" name="product[message]"><br><br>
-  Type:<br>
-  <% Type.all.each do |type| %>
-  <input type="checkbox" name="product[type_ids][]" value="<%= type.id%>" <%='checked' if @prod.types.collect{|x| x.name}.include?(type.name)%> ><%=type.name%> </input><br>
-  <%end%><br>
+  <fieldset>
+    <legend>Edit: <%= @prod.name %></legend>
 
-  <input type="submit" value="Submit">
+    <div class="form-group">
+      <label  class="col-lg-2 control-label" >Name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" value="<%= @prod.name%>" name="product[name]" placeholder="Name" required>
+      </div>
+    </div>
 
+    <div class="form-group">
+      <label  class="col-lg-2 control-label" >Link</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" value="<%= @prod.link%>" name="product[link]" placeholder="Link" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label  class="col-lg-2 control-label" >Message</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" value="<%= @prod.message%>" name="product[message]" placeholder="Message" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Types: </label>
+      <div class="col-lg-10">
+        <div class="checkbox">
+          <label>
+              <% Type.all.each do |type| %>
+                <input type="checkbox" name="product[type_ids][]" value="<%= type.id%>" <%='checked' if @prod.types.collect{|x| x.name}.include?(type.name)%> ><%=type.name%> </input><br>
+                  <%end%>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Submit">
+  </fieldset>
 </form>
