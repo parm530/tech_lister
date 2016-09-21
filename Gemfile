@@ -12,6 +12,9 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 
+gem "onebox"
+gem 'link_thumbnailer'
+
 group :test do
   gem 'rspec'
   gem 'capybara'

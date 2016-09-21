@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !session[:user_id]
-      erb :'/users/create_user'
+      erb :'/users/new'
     else
       redirect to '/users/:id'
     end
@@ -23,21 +23,22 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(:username => params[:username])
+    @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      redirect to '/'
+      redirect to '/signup'
     end
   end
 
   get '/users/:id' do
     if logged_in?
       @user = User.find(session[:user_id])
-      erb :'/users/home'
+      @prods = @user.products
+      erb :'/users/show'
     else
-      redirect to '/signup'
+      redirect to '/login'
     end
   end
 

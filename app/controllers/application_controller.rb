@@ -1,4 +1,5 @@
 require './config/environment'
+require 'link_thumbnailer'
 
 class ApplicationController < Sinatra::Base
 
@@ -10,6 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    @products = Product.all
     erb :index
   end
 

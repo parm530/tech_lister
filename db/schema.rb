@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914182034) do
+ActiveRecord::Schema.define(version: 20160921162424) do
 
   create_table "product_types", force: :cascade do |t|
     t.integer "product_id"
@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 20160914182034) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "link"
-    t.string "message"
+    t.string  "name"
+    t.string  "link"
+    t.string  "message"
+    t.integer "rating"
   end
 
   create_table "types", force: :cascade do |t|

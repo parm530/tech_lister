@@ -1,0 +1,26 @@
+<h3>Current list of <%= @user.username%>'s tech-links:</h3>
+
+<% @user.products.each.with_index(1) do |p, i| %>
+
+  <strong><%=i%>. <a href="<%=p.link%>" target="_blank"><%=p.name%></a></strong> 
+
+  <p><strong>Message: </strong><%= p.message%></p> 
+  <p>Type(s): 
+  <%p.types.each do |type| %>
+    <i>[<%= type.name %>]</i>
+    <% object = LinkThumbnailer.generate(p.link)%>
+    <%object.images.first.src.to_s%>
+    <img src="<%=object.images.first.src.to_s%>">
+  <% end %></p>
+
+  <a href="/products/<%=p.id%>/edit"><input type="submit" value="Edit"></a>
+  
+  <form method="post" action="/products/<%=p.id%>">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+  </form><br>
+
+<%end%>
+
+<p><a href="/products/new">Add new links!</a></p>
+

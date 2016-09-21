@@ -1,1 +1,27 @@
+<h2>Popular User Products</h2>
+<h4>Sort By:</h4>
 
+<% if logged_in? %>
+  <form method="post" action="/rating">
+    <input type="submit" value="Rating">
+  </form><br>
+  <form method="post" action="/name">
+    <input type="submit" value="Name">
+  </form>
+<% end %>
+
+<% @products.each.with_index(1) do |prod, i| %>
+  <% if logged_in? %>
+    <h3><%=i%>. <a href="<%= prod.link %>" target="_blank"><%= prod.name %></a>
+    <p>Rating: <i><%= prod.rating = prod.users.size %></i> user(s) have Tech-Listed this product </p>
+    <% prod.save %>
+
+    <form method="post" action="/user_products">
+      <input type="hidden" name="product_id" value="<%=prod.id%>">
+      <input type="submit" value="Add Tech-List">
+    </form></h3>
+
+  <%else%>
+    <h3><%=i%>. <a href="<%= prod.link %>" target="_blank"><%= prod.name %><br></a></h3>
+  <%end%>
+<% end %>

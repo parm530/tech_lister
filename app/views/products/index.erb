@@ -1,4 +1,0 @@
-<h2>Popular User Products</h2>
-<% Product.all.each.with_index(1) do |prod, i| %>
-  <h3><%=i%>. <a href="<%= prod.link %>" target="_blank"><%= prod.name %><br></a></h3>
-  <% end %>

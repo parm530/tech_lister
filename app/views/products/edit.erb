@@ -1,0 +1,17 @@
+<h3>Edit: <%= @prod.name %> </h3>
+
+
+<form method="POST" action="/products/<%=@prod.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <input id="hidden" type="hidden" name="product_id" value="<%= @prod.id %>">
+  Name: <input type="text" name="product[name]" required ><br><br>
+  Link: <input type="text" name="product[link]" required ><br><br>
+  Message:<input type="text" name="product[message]"><br><br>
+  Type:<br>
+  <% Type.all.each do |type| %>
+  <input type="checkbox" name="product[type_ids][]" value="<%= type.id%>" <%='checked' if @prod.types.collect{|x| x.name}.include?(type.name)%> ><%=type.name%> </input><br>
+  <%end%><br>
+
+  <input type="submit" value="Submit">
+
+</form>
