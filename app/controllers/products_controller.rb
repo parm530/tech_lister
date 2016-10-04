@@ -23,14 +23,9 @@ class ProductsController < ApplicationController
 
   post '/products' do
     @user = User.find(session[:user_id])
-    if Product.all.detect{|x| x.link == params[:product][:link]}
-      @product = Product.find_by(link: params[:product][:link])
-      @product.update(type_ids: params[:product][:type_ids])
-    else
-      @product = Product.create(params[:product])
-    end
+    @link = params[:product]
+    result = Product.find_product(@link, @user)
 
-    @user.products << @product
     redirect to "/users/#{@user.id}"
   end
 
